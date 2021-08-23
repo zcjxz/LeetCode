@@ -1,38 +1,36 @@
 package 链表
 
 /**
- * 自己写的版本，后面补充 递归 、 迭代 的版本
- * 自己建一个指示器，间隔一个进行交换
+ * 迭代的解法
+ * 使用 temp、node1、node2 三个指针对 node1、node2 调换位置，然后再向前移动两位，调换下一组
  */
 fun swapPairs(head: ListNode?): ListNode? {
-    if (head == null) return null
-    var pre = head
-    var i = 0
-    var current = head.next
+    if (head?.next==null) return head
     val fakeHead = ListNode(0)
-    fakeHead.next = current
-    while (current?.next != null) {
-        i++
-        if (i % 2 != 0) {
-            // 进行交换
-            pre!!.next = current.next
-            current.next = pre
-            current = pre.next
-        }else {
-            // 不需要交换的时候，指针往前移动
-            current = current.next
-            // 保存下一个 pre 的 next 指针
-            val temp = pre!!.next
-            // 提前把上一个结点 next 改为下次要交换的下个结点，否则中间的结点会丢失
-            // 比如没有把 1 的 next 改为 4，就会导致 4 这个结点丢失，因为 3 的 next 会指向 5
-            pre.next = current
-            pre = temp
-        }
-
+    fakeHead.next = head
+    var temp = fakeHead
+    while (temp.next!=null && temp.next!!.next!=null){
+        val node1 = temp.next
+        val node2 = node1!!.next
+        temp.next = node2
+        node1.next = node2!!.next
+        node2.next = node1
+        temp = temp.next!!.next!!
     }
     return fakeHead.next
 }
 
+/**
+ * 递归的解法
+ * 每次只把 第一个 跟 第二个 结点互换。
+ */
+fun swapPairs1(head: ListNode?): ListNode? {
+    if(head?.next == null) return head
+    val newHead = head.next
+    head.next = swapPairs1(newHead!!.next)  // 注意这里要传 newHead 的 next 相当于 head.next.next，这个才是后面链表的指针
+    newHead.next = head // next 用完之后记得重置为 head
+    return newHead
+}
 
 
 fun main() {
