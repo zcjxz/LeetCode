@@ -23,6 +23,30 @@ fun moveZeroes(nums: IntArray): Unit {
     nums.forEach { print("$it. ") }
 }
 
+/**
+ * 二刷
+ * 这种做法是把非零的数全都移到前面，后面剩下的再补零就好了
+ */
+fun moveZeroesT2(nums:IntArray){
+    var i = 0
+    var p = 0
+    while (p<nums.size){
+        if (nums[p] !=0){
+            nums[i] = nums[p]
+            i++
+        }
+        p++
+    }
+    while (i<p){
+        nums[i] = 0
+        i++
+    }
+}
+
 fun main() {
-    moveZeroes(intArrayOf(1,0,3,0,0,52))
+    val input = intArrayOf(1,0,3,0,0,52)
+    moveZeroes(input)
+    input.forEach {
+        print("$it、")
+    }
 }
