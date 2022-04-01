@@ -57,7 +57,45 @@ fun threeSum(nums: IntArray): List<List<Int>> {
     return result
 }
 
+fun threeSumT2(nums: IntArray): List<List<Int>> {
+    if (nums.size<3) return emptyList()
+    val result = mutableListOf<List<Int>>()
+    nums.sort()
+    var i =0
+    while (i<nums.size-2){
+        // 去重
+        while (i>0 && nums[i] == nums[i-1]){
+            i++
+            // 记得这里要用 continue ，防止有三个以上相同的数，只去重了第二个的情况
+            continue
+        }
+        var l = i+1
+        var r = nums.size-1
+        while (l<r) {
+            val dp = nums[i] + nums[l] + nums[r]
+            when{
+                dp==0->{
+                    result.add(mutableListOf(nums[i],nums[l],nums[r]))
+                    while (l<r && nums[l]==nums[l+1]) l++
+                    while (l<r && nums[r]==nums[r-1]) r--
+                    l++
+                    r--
+                }
+                dp<0 ->{
+                    l++
+                }
+                dp>0 ->{
+                    r--
+                }
+            }
+        }
+        i++
+    }
+    return result
+}
+
 fun main() {
-//    threeSum(intArrayOf(-1, 0, 1, 2, -1, -4))
-    threeSum(intArrayOf(0,0,0,0))
+//    threeSumT2(intArrayOf(-1, 0, 1, 2, -1, -4))
+//    threeSum(intArrayOf(0,0,0))
+    threeSumT2(intArrayOf(-4,-2,-2,-2,0,1,2,2,2,3,3,4,4,6,6))
 }
