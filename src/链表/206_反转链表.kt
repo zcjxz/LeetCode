@@ -17,6 +17,33 @@ fun reverseList(head: ListNode?): ListNode? {
     return pre
 }
 
+/**
+ * 双指针迭代法
+ */
+fun reverseListT2(head: ListNode?): ListNode? {
+    head?.next?:return head
+    var pre:ListNode? = null
+    var cur = head
+    while (cur!=null){
+        val next = cur.next
+        cur.next = pre
+        pre = cur
+        cur = next
+    }
+    return pre
+}
+
+/**
+ * 递归
+ */
+fun reverseListT2_2(head: ListNode?): ListNode? {
+    head?.next?:return head
+    val pre = reverseListT2_2(head.next)
+    head.next?.next = head
+    head.next = null
+    return pre
+}
+
 fun main() {
 
 }

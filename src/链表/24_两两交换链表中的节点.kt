@@ -32,6 +32,18 @@ fun swapPairs1(head: ListNode?): ListNode? {
     return newHead
 }
 
+/**
+ * 递归。第二次做反倒觉得递归好做一些
+ */
+fun swapPairsT2(head: ListNode?): ListNode? {
+    head?.next ?: return head
+    val next = swapPairs1(head.next?.next)
+    val result = head.next
+    result?.next = head
+    head.next = next
+    return result
+}
+
 
 fun main() {
     printListNode(swapPairs(createListNode(intArrayOf(1, 2, 3, 4, 5, 6, 7))))
