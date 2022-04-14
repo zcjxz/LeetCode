@@ -4,8 +4,8 @@ import java.util.*
 
 class MinStack() {
 
-    private val mainStack = Stack<Int>()
-    private val minStack = Stack<Int>()
+    private val mainStack = LinkedList<Int>()
+    private val minStack = LinkedList<Int>()
 
     fun push(x: Int) {
         mainStack.push(x)
