@@ -1,9 +1,8 @@
 package 栈
 
-import java.util.Stack
 
 fun largestRectangleArea(heights: IntArray): Int {
-    val stack = ArrayDeque<Int>()
+    val stack = java.util.ArrayDeque<Int>()
     // 由于 Kotlin 中入参 无法改变，只能 copy 多一份
     val copy = IntArray(heights.size+2)
     heights.copyInto(copy,1)
@@ -23,7 +22,6 @@ fun largestRectangleArea(heights: IntArray): Int {
         stack.push(i)
     }
     return max
-    return maxSize
 }
 
 fun main() {
