@@ -2,15 +2,15 @@ package 数组
 
 fun removeDuplicates(nums: IntArray): Int {
     if (nums.isEmpty()) return 0
-    var s = 0
-    var p = 1
-    while (p<nums.size){
-        if (nums[p]!=nums[s]){
-            nums[++s] = nums[p]
+    var i = 0
+    var j = 1
+    while (j<nums.size){
+        if (nums[i]!=nums[j]){
+            nums[++i] = nums[j]
         }
-        p++
+        j++
     }
-    return s+1
+    return ++i
 }
 
 fun main() {
