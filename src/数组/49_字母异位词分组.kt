@@ -25,8 +25,26 @@ fun groupAnagrams(strs: Array<String>): List<List<String>> {
     return result
 }
 
+fun groupAnagrams2(strs: Array<String>): List<List<String>> {
+    val result = mutableMapOf<String,MutableList<String>>()
+    strs.forEach {
+        val sortItem = String(it.toCharArray().apply { sort() })
+        if (result.containsKey(sortItem)){
+            result.getOrDefault(sortItem, mutableListOf())
+            result[sortItem]?.add(it)
+        }else{
+            result[sortItem] = mutableListOf(it)
+        }
+    }
+    val results = mutableListOf<List<String>>()
+    result.forEach {
+        results.add(it.value.toList())
+    }
+    return results.toList()
+}
+
 fun main() {
-    groupAnagrams(arrayOf("eat", "tea", "tan", "ate", "nat", "bat")).forEach {
+    groupAnagrams2(arrayOf("eat", "tea", "tan", "ate", "nat", "bat")).forEach {
         print("[")
         it.forEach{
             print("$it、")
